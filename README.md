@@ -24,7 +24,7 @@ Projeto inspirado no zod: https://github.com/colinhacks/zod
 ```go
     // don't expect error when number is valid
     number := z.NewNumberSchema()
-    result, err := number.Parse("not a number")
+    result, err := number.Parse(12)
     
     // expect an error when number is invalid and return custom error message
     number2 := z.NewNumberSchema()
