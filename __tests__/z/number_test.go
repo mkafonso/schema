@@ -7,27 +7,31 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestIsNumber_withValidNumber(t *testing.T) {
-	// expect not error when number is valid
-	value := 12
-	err := z.IsNumber(value)
+func TestNumber_withValidNumber(t *testing.T) {
+	// don't expect error when number is valid
+	number := z.NewNumberSchema()
+	result, err := number.Parse(42.5)
+	assert.Equal(t, result, 42.5)
 	assert.NoError(t, err)
 }
 
-func TestIsNumber_withInvalidNumber(t *testing.T) {
+func TestNumber_withInvalidNumber(t *testing.T) {
 	// expect an error when number is invalid
-	value := "not a number"
-	err := z.IsNumber(value)
+	number := z.NewNumberSchema()
+	result, err := number.Parse("not a number")
 	assert.Error(t, err)
-	assert.Contains(t, err.Error(), "value must be a number")
+	assert.Equal(t, err.Error(), "value must be a number")
+	assert.Equal(t, result, 0.0)
 
 	// expect an error when number is invalid and return custom error message
-	value2 := "not a number"
-	err = z.IsNumber(value2, "número inválido")
-	assert.Equal(t, err.Error(), "número inválido")
+	number2 := z.NewNumberSchema()
+	result2, err2 := number2.Message("custom error message").Parse("not a number")
+	assert.Equal(t, err2.Error(), "custom error message")
+	assert.Equal(t, result2, 0.0)
 
-	// expect an error when number is invalid and return only the first custom error message
-	invalidValue := "not a number"
-	err = z.IsNumber(invalidValue, "número inválido", "another error message")
-	assert.Equal(t, err.Error(), "número inválido")
+	// expect an error when number is invalid and return the last custom error message
+	number3 := z.NewNumberSchema()
+	result3, err3 := number3.Message("first custom error message").Message("second custom error message").Parse("not a number")
+	assert.Equal(t, err3.Error(), "second custom error message")
+	assert.Equal(t, result3, 0.0)
 }

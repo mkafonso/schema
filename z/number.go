@@ -2,21 +2,47 @@ package z
 
 import "errors"
 
-// IsNumber checks if the given data is a valid number.
-//
-// Parameters:
-//   - data: The data to be validated.
-//   - customMessage: An optional custom error message to use when the validation fails.
+type numberSchema struct {
+	customMessage string
+}
+
+// NewNumberSchema creates a new instance of the numberSchema for parsing and validating numbers.
 //
 // Returns:
-//   - An error if the data is not a valid number; otherwise, nil.
-func IsNumber(data interface{}, customMessage ...string) error {
-	if _, ok := data.(float64); !ok {
-		defaultMessage := "value must be a number"
-		if len(customMessage) > 0 {
-			defaultMessage = customMessage[0]
-		}
-		return errors.New(defaultMessage)
+//   - A pointer to the newly created numberSchema instance.
+func NewNumberSchema() *numberSchema {
+	return &numberSchema{}
+}
+
+// Parse parses and validates the input data as a number.
+//
+// Parameters:
+//   - data: The data to be validated as a number.
+//
+// Returns:
+//   - The parsed number value if the validation succeeds, or 0.0.
+//   - An error with a custom error message if the validation fails.
+func (ns *numberSchema) Parse(data interface{}) (float64, error) {
+	if num, ok := data.(float64); ok {
+		return num, nil
 	}
-	return nil
+
+	message := "value must be a number"
+	if ns.customMessage != "" {
+		message = ns.customMessage
+	}
+
+	return 0, errors.New(message)
+}
+
+// Message sets a custom error message for the numberSchema instance.
+//
+// Parameters:
+//   - customMessage: The custom error message to be used when validation fails.
+//
+// Returns:
+//   - The numberSchema instance with the custom error message set.
+func (ns *numberSchema) Message(customMessage string) *numberSchema {
+	ns.customMessage = customMessage
+	return ns
 }
