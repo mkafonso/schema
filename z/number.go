@@ -6,16 +6,17 @@ import "errors"
 //
 // Parameters:
 //   - data: The data to be validated.
+//   - customMessage: An optional custom error message to use when the validation fails.
 //
 // Returns:
 //   - An error if the data is not a valid number; otherwise, nil.
-func IsNumber(data interface{}) error {
-	// Check if the data can be typecasted to a float64.
-	// If not, return an error indicating that the value must be a number.
+func IsNumber(data interface{}, customMessage ...string) error {
 	if _, ok := data.(float64); !ok {
-		return errors.New("value must be a number")
+		defaultMessage := "value must be a number"
+		if len(customMessage) > 0 {
+			defaultMessage = customMessage[0]
+		}
+		return errors.New(defaultMessage)
 	}
-
-	// If the data is a valid number, return nil to indicate no errors.
 	return nil
 }
