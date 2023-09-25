@@ -22,14 +22,14 @@ func NewStringSchema() *stringSchema {
 // Returns:
 //   - The parsed string value if the validation succeeds, or an empty string.
 //   - An error with a custom error message if the validation fails.
-func (ns *stringSchema) Parse(data interface{}) (string, error) {
+func (ss *stringSchema) Parse(data interface{}) (string, error) {
 	if str, ok := data.(string); ok {
 		return str, nil
 	}
 
 	message := "value must be a string"
-	if ns.customMessage != "" {
-		message = ns.customMessage
+	if ss.customMessage != "" {
+		message = ss.customMessage
 	}
 
 	return "", errors.New(message)
@@ -42,7 +42,7 @@ func (ns *stringSchema) Parse(data interface{}) (string, error) {
 //
 // Returns:
 //   - The stringSchema instance with the custom error message set.
-func (ns *stringSchema) Message(customMessage string) *stringSchema {
-	ns.customMessage = customMessage
-	return ns
+func (ss *stringSchema) Message(customMessage string) *stringSchema {
+	ss.customMessage = customMessage
+	return ss
 }
