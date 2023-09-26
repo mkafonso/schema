@@ -19,6 +19,13 @@
     // expect an error when string is invalid and return custom error message
     str2 := z.NewStringSchema()
     result2, err2 := str2.Message("custom error message").Parse(12)
+    
+    // expect an error when string length exceed Max value
+    str3 := z.NewStringSchema()
+    result2, err := str3.Max(3).Message("custom error message").Parse("Luna")
+    
+    str4 := z.NewStringSchema()
+    result4, err4 := str4.Min(5).Message("custom error message").Parse("Hi")
 ```
 
 
