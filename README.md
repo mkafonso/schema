@@ -35,6 +35,62 @@
 ```
 
 ---
+
+### Coercion
+
+
+`Coercion to string`
+
+```go
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Parse("Luna") // "Luna"
+
+	schema2 := z.NewCoerceStringSchema()
+	result2, err2 := schema2.Parse(12) // "12"
+
+	schema3 := z.NewCoerceStringSchema()
+	result3, err3 := schema3.Parse(true) // "true"
+```
+
+
+`Coercion to bool`
+
+```go
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("true") // true
+
+	schema2 := z.NewCoerceBoolSchema()
+	result2, err2 := schema2.Parse("FalSe") // true
+
+	schema3 := z.NewCoerceBoolSchema()
+	result3, err3 := schema3.Parse(true) // true
+
+	schema4 := z.NewCoerceBoolSchema()
+	result4, err4 := schema4.Parse(false) // false
+
+	schema5 := z.NewCoerceBoolSchema()
+	result5, err5 := schema5.Parse("Hello") // true
+
+	schema6 := z.NewCoerceBoolSchema()
+	result6, err6 := schema6.Parse("") // false
+
+	schema7 := z.NewCoerceBoolSchema()
+	result7, err7 := schema7.Parse(10) // true
+
+	schema8 := z.NewCoerceBoolSchema()
+	result8, err8 := schema8.Parse(nil) // false
+
+	schema9 := z.NewCoerceBoolSchema()
+	result9, err9 := schema9.Parse(1) // true
+
+	schema10 := z.NewCoerceBoolSchema()
+	result10, err10 := schema10.Parse(0) // false
+
+	schema11 := z.NewCoerceBoolSchema()
+	result11, err11 := schema11.Parse([]interface{}{}) // true
+```
+
+---
   
 
 ![Screen Shot 2023-09-25 at 01 43 04](https://github.com/mkafonso/go-schema/assets/73212666/761bdaea-20df-4555-9f97-3f5986b7443d)
