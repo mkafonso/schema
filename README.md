@@ -13,19 +13,19 @@
 
 ```go
     // don't expect error when string is valid
-    str := z.NewStringSchema()
-    result, err := str.Parse("Luna")
+    schema := z.NewStringSchema()
+    result, err := schema.Parse("Luna")
     
     // expect an error when string is invalid and return custom error message
-    str2 := z.NewStringSchema()
-    result2, err2 := str2.Message("custom error message").Parse(12)
+    schema := z.NewStringSchema()
+    result, err := schema.Message("custom error message").Parse(12)
     
     // expect an error when string length exceed Max value
-    str3 := z.NewStringSchema()
-    result2, err := str3.Max(3).Message("custom error message").Parse("Luna")
+    schema := z.NewStringSchema()
+    result, err := schema.Max(3).Message("custom error message").Parse("Luna")
     
-    str4 := z.NewStringSchema()
-    result4, err4 := str4.Min(5).Message("custom error message").Parse("Hi")
+    schema := z.NewStringSchema()
+    result, err := schema.Min(5).Message("custom error message").Parse("Hi")
 ```
 
 
@@ -33,12 +33,12 @@
 
 ```go
     // don't expect error when number is valid
-    number := z.NewNumberSchema()
-    result, err := number.Parse(12)
+    schema := z.NewNumberSchema()
+    result, err := schema.Parse(12)
     
     // expect an error when number is invalid and return custom error message
-    number2 := z.NewNumberSchema()
-    result2, err2 := number2.Message("custom error message").Parse("not a number")
+    schema := z.NewNumberSchema()
+    result, err := schema.Message("custom error message").Parse("not a number")
 ```
 
 ---
@@ -52,11 +52,11 @@
 	schema := z.NewCoerceStringSchema()
 	result, err := schema.Parse("Luna") // "Luna"
 
-	schema2 := z.NewCoerceStringSchema()
-	result2, err2 := schema2.Parse(12) // "12"
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Pare(12) // "12"
 
-	schema3 := z.NewCoerceStringSchema()
-	result3, err3 := schema3.Parse(true) // "true"
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Parse(true) // "true"
 ```
 
 
@@ -66,35 +66,35 @@
 	schema := z.NewCoerceBoolSchema()
 	result, err := schema.Parse("true") // true
 
-	schema2 := z.NewCoerceBoolSchema()
-	result2, err2 := schema2.Parse("FalSe") // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("FalSe") // true
 
-	schema3 := z.NewCoerceBoolSchema()
-	result3, err3 := schema3.Parse(true) // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(true) // true
 
-	schema4 := z.NewCoerceBoolSchema()
-	result4, err4 := schema4.Parse(false) // false
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(false) // false
 
-	schema5 := z.NewCoerceBoolSchema()
-	result5, err5 := schema5.Parse("Hello") // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("Hello") // true
 
-	schema6 := z.NewCoerceBoolSchema()
-	result6, err6 := schema6.Parse("") // false
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("") // false
 
-	schema7 := z.NewCoerceBoolSchema()
-	result7, err7 := schema7.Parse(10) // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(10) // true
 
-	schema8 := z.NewCoerceBoolSchema()
-	result8, err8 := schema8.Parse(nil) // false
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(nil) // false
 
-	schema9 := z.NewCoerceBoolSchema()
-	result9, err9 := schema9.Parse(1) // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(1) // true
 
-	schema10 := z.NewCoerceBoolSchema()
-	result10, err10 := schema10.Parse(0) // false
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(0) // false
 
-	schema11 := z.NewCoerceBoolSchema()
-	result11, err11 := schema11.Parse([]interface{}{}) // true
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse([]interface{}{}) // true
 ```
 
 ---
