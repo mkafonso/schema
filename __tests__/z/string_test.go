@@ -35,3 +35,19 @@ func TestString_withInvalidString(t *testing.T) {
 	assert.Equal(t, err3.Error(), "second custom error message")
 	assert.Equal(t, result3, "")
 }
+
+func TestString_testMinMethod(t *testing.T) {
+	// expect an error when string length exceed Max value
+	str := z.NewStringSchema()
+	result, err := str.Max(3).Message("custom error message").Parse("Luna")
+	assert.Equal(t, result, "")
+	assert.Error(t, err)
+	assert.Equal(t, err.Error(), "custom error message")
+
+	// expect an error when string length exceed Max value
+	str2 := z.NewStringSchema()
+	result2, err2 := str2.Min(5).Message("custom error message").Parse("Hi")
+	assert.Equal(t, result2, "")
+	assert.Error(t, err2)
+	assert.Equal(t, err2.Error(), "custom error message")
+}
