@@ -2,7 +2,6 @@
 
 - Zod-inspired project: https://github.com/colinhacks/zod
 - Star the repository
-- I am accepting new contribuition
 - Each contribution has a significant impact within the Golang community
 
 ---
