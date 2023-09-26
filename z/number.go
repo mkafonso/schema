@@ -1,6 +1,9 @@
 package z
 
-import "errors"
+import (
+	"errors"
+	"strconv"
+)
 
 type numberSchema struct {
 	customMessage string
@@ -18,31 +21,63 @@ func NewNumberSchema() *numberSchema {
 //
 // Parameters:
 //   - data: The data to be validated as a number.
+//   - errorMessage (optional): The custom error message to be used when validation fails.
 //
 // Returns:
-//   - The parsed number value if the validation succeeds, or 0.0.
-//   - An error with a custom error message if the validation fails.
-func (ns *numberSchema) Parse(data interface{}) (float64, error) {
-	if num, ok := data.(float64); ok {
-		return num, nil
+//   - The parsed number value if the validation succeeds.
+//   - An error with the custom error message if the validation fails.
+func (ns *numberSchema) Parse(data interface{}, errorMessage ...string) (float64, error) {
+	var num float64
+
+	switch val := data.(type) {
+	case float64:
+		num = val
+	case int:
+		num = float64(val)
+	case string:
+		parsedNum, err := strconv.ParseFloat(val, 64)
+		if err != nil {
+			message := "value must be a number"
+			if ns.customMessage != "" {
+				message = ns.customMessage
+			}
+
+			if len(errorMessage) > 0 {
+				message = errorMessage[0]
+			}
+
+			return 0, errors.New(message)
+		}
+		num = parsedNum
+	default:
+		message := "value must be a number"
+		if ns.customMessage != "" {
+			message = ns.customMessage
+		}
+		if len(errorMessage) > 0 {
+			message = errorMessage[0]
+		}
+		return 0, errors.New(message)
 	}
 
-	message := "value must be a number"
-	if ns.customMessage != "" {
-		message = ns.customMessage
-	}
-
-	return 0, errors.New(message)
+	return num, nil
 }
 
-// Message sets a custom error message for the numberSchema instance.
+// IsPositive checks if the given number is positive.
 //
 // Parameters:
-//   - customMessage: The custom error message to be used when validation fails.
+//   - num: The number to be checked for positivity.
+//   - errorMessage (optional): The custom error message to be used when the number is not positive.
 //
 // Returns:
-//   - The numberSchema instance with the custom error message set.
-func (ns *numberSchema) Message(customMessage string) *numberSchema {
-	ns.customMessage = customMessage
-	return ns
+//   - An error with the custom error message if the number is not positive.
+func (ns *numberSchema) Positive(num float64, errorMessage ...string) error {
+	if num < 0 {
+		message := "value must be positive"
+		if len(errorMessage) > 0 {
+			message = errorMessage[0]
+		}
+		return errors.New(message)
+	}
+	return nil
 }
