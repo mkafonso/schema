@@ -1,6 +1,9 @@
 ## go-schema
 
-Projeto inspirado no zod: https://github.com/colinhacks/zod
+- Zod-inspired project: https://github.com/colinhacks/zod
+- Star the repository
+- I am accepting new contribuition
+- Each contribution has a significant impact within the Golang community
 
 ---
 
@@ -10,12 +13,19 @@ Projeto inspirado no zod: https://github.com/colinhacks/zod
 
 ```go
     // don't expect error when string is valid
-    str := z.NewStringSchema()
-    result, err := str.Parse("Luna")
+    schema := z.NewStringSchema()
+    result, err := schema.Parse("Luna")
     
     // expect an error when string is invalid and return custom error message
-    str2 := z.NewStringSchema()
-    result2, err2 := str2.Message("custom error message").Parse(12)
+    schema := z.NewStringSchema()
+    result, err := schema.Message("custom error message").Parse(12)
+    
+    // expect an error when string length exceed Max value
+    schema := z.NewStringSchema()
+    result, err := schema.Max(3).Message("custom error message").Parse("Luna")
+    
+    schema := z.NewStringSchema()
+    result, err := schema.Min(5).Message("custom error message").Parse("Hi")
 ```
 
 
@@ -23,12 +33,68 @@ Projeto inspirado no zod: https://github.com/colinhacks/zod
 
 ```go
     // don't expect error when number is valid
-    number := z.NewNumberSchema()
-    result, err := number.Parse(12)
+    schema := z.NewNumberSchema()
+    result, err := schema.Parse(12)
     
     // expect an error when number is invalid and return custom error message
-    number2 := z.NewNumberSchema()
-    result2, err2 := number2.Message("custom error message").Parse("not a number")
+    schema := z.NewNumberSchema()
+    result, err := schema.Message("custom error message").Parse("not a number")
+```
+
+---
+
+### Coercion
+
+
+`Coercion to string`
+
+```go
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Parse("Luna") // "Luna"
+
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Pare(12) // "12"
+
+	schema := z.NewCoerceStringSchema()
+	result, err := schema.Parse(true) // "true"
+```
+
+
+`Coercion to bool`
+
+```go
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("true") // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("FalSe") // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(true) // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(false) // false
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("Hello") // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse("") // false
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(10) // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(nil) // false
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(1) // true
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse(0) // false
+
+	schema := z.NewCoerceBoolSchema()
+	result, err := schema.Parse([]interface{}{}) // true
 ```
 
 ---
