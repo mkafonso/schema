@@ -5,16 +5,16 @@ import (
 	"strconv"
 )
 
-type NumberSchema struct {
+type numberSchema struct {
 	customMessage string
 }
 
-// NewNumberSchema creates a new instance of the NumberSchema for parsing and validating numbers.
+// NewNumberSchema creates a new instance of the numberSchema for parsing and validating numbers.
 //
 // Returns:
-//   - A pointer to the newly created NumberSchema instance.
-func NewNumberSchema() *NumberSchema {
-	return &NumberSchema{}
+//   - A pointer to the newly created numberSchema instance.
+func NewNumberSchema() *numberSchema {
+	return &numberSchema{}
 }
 
 // Parse parses and validates the input data as a number.
@@ -26,7 +26,7 @@ func NewNumberSchema() *NumberSchema {
 // Returns:
 //   - The parsed number value if the validation succeeds.
 //   - An error with the custom error message if the validation fails.
-func (ns *NumberSchema) Parse(data interface{}, errorMessage ...string) (float64, error) {
+func (ns *numberSchema) Parse(data interface{}, errorMessage ...string) (float64, error) {
 	var num float64
 
 	switch val := data.(type) {
