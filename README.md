@@ -62,65 +62,11 @@ import (
 ```go
     // don't expect error when number is valid
     schema := z.NewNumberSchema()
-    result, err := schema.Parse(12)
-
+    result, err := schema.Parse(42.5)
+    
     // expect an error when number is invalid and return custom error message
     schema := z.NewNumberSchema()
-    result, err := schema.Message("custom error message").Parse("not a number")
-```
-
----
-
-### Coercion
-
-`Coercion to string`
-
-```go
-	schema := z.NewCoerceStringSchema()
-	result, err := schema.Parse("Luna") // "Luna"
-
-	schema := z.NewCoerceStringSchema()
-	result, err := schema.Pare(12) // "12"
-
-	schema := z.NewCoerceStringSchema()
-	result, err := schema.Parse(true) // "true"
-```
-
-`Coercion to bool`
-
-```go
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse("true") // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse("FalSe") // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(true) // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(false) // false
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse("Hello") // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse("") // false
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(10) // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(nil) // false
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(1) // true
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse(0) // false
-
-	schema := z.NewCoerceBoolSchema()
-	result, err := schema.Parse([]interface{}{}) // true
+    result, err := schema.Parse("Hi", "Custom error message")
 ```
 
 ---
