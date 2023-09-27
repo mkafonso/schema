@@ -5,16 +5,16 @@ import (
 	"strconv"
 )
 
-type numberSchema struct {
+type NumberSchema struct {
 	customMessage string
 }
 
-// NewNumberSchema creates a new instance of the numberSchema for parsing and validating numbers.
+// NewNumberSchema creates a new instance of the NumberSchema for parsing and validating numbers.
 //
 // Returns:
-//   - A pointer to the newly created numberSchema instance.
-func NewNumberSchema() *numberSchema {
-	return &numberSchema{}
+//   - A pointer to the newly created NumberSchema instance.
+func NewNumberSchema() *NumberSchema {
+	return &NumberSchema{}
 }
 
 // Parse parses and validates the input data as a number.
@@ -26,7 +26,7 @@ func NewNumberSchema() *numberSchema {
 // Returns:
 //   - The parsed number value if the validation succeeds.
 //   - An error with the custom error message if the validation fails.
-func (ns *numberSchema) Parse(data interface{}, errorMessage ...string) (float64, error) {
+func (ns *NumberSchema) Parse(data interface{}, errorMessage ...string) (float64, error) {
 	var num float64
 
 	switch val := data.(type) {
@@ -61,23 +61,4 @@ func (ns *numberSchema) Parse(data interface{}, errorMessage ...string) (float64
 	}
 
 	return num, nil
-}
-
-// IsPositive checks if the given number is positive.
-//
-// Parameters:
-//   - num: The number to be checked for positivity.
-//   - errorMessage (optional): The custom error message to be used when the number is not positive.
-//
-// Returns:
-//   - An error with the custom error message if the number is not positive.
-func (ns *numberSchema) Positive(num float64, errorMessage ...string) error {
-	if num < 0 {
-		message := "value must be positive"
-		if len(errorMessage) > 0 {
-			message = errorMessage[0]
-		}
-		return errors.New(message)
-	}
-	return nil
 }
