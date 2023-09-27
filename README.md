@@ -71,4 +71,8 @@ import (
 
 ---
 
-![Screen Shot 2023-09-25 at 01 43 04](https://github.com/mkafonso/go-schema/assets/73212666/761bdaea-20df-4555-9f97-3f5986b7443d)
+### Comprehensive description for each method
+
+![Screen Shot 2023-09-27 at 01 55 14](https://github.com/mkafonso/go-schema/assets/73212666/17e90457-3585-4dfd-8a43-37aec816ce60)
+
+
