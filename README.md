@@ -70,6 +70,53 @@ import (
 
 ---
 
+### Struct validation
+
+```go
+
+    type Person struct {
+      Name string `json:"name"`
+      Age  int    `json:"age"`
+    }
+    
+    // Valid Data example
+    data := map[string]interface{}{
+      "name": "Alice",
+      "age":  30,
+    }
+    
+    person := Person{}
+    err := z.ParseStruct(data, &person)
+    
+    // Missing field example
+    data := map[string]interface{}{
+      "name": "Bob",
+    }
+    
+    person := Person{}
+    err := z.ParseStruct(data, &person)
+    
+    // Invalid Field Type (age)
+    data := map[string]interface{}{
+      "name": "Charlie",
+      "age":  "invalid-type",
+    }
+    
+    person := Person{}
+    err := z.ParseStruct(data, &person)
+    
+    // example invalid target (wrong reference)
+    data := map[string]interface{}{
+      "name": "David",
+      "age":  25,
+    }
+    
+    person := Person{}
+    err := z.ParseStruct(data, person)
+```
+
+---
+
 ### Coercion
 
 ```go
