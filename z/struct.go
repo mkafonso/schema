@@ -30,7 +30,7 @@ import (
 //	  log.Fatal(err)
 //	}
 //	// Now, the 'person' struct will contain the parsed values.
-func Parse(data map[string]interface{}, target interface{}) error {
+func ParseStruct(data map[string]interface{}, target interface{}) error {
 	// get the type of the target object.
 	targetType := reflect.TypeOf(target)
 
