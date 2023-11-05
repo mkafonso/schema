@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestCoerceSchema_TestWithStringToString(t *testing.T) {
+func TestCoerceSchemaTestWithStringToString(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.String().Parse("Luna")
 
@@ -15,7 +15,7 @@ func TestCoerceSchema_TestWithStringToString(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithNumberToString(t *testing.T) {
+func TestCoerceSchemaTestWithNumberToString(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.String().Parse(12)
 
@@ -23,7 +23,7 @@ func TestCoerceSchema_TestWithNumberToString(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithBoolToString(t *testing.T) {
+func TestCoerceSchemaTestWithBoolToString(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.String().Parse(true)
 
@@ -31,7 +31,7 @@ func TestCoerceSchema_TestWithBoolToString(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithStringToBool(t *testing.T) {
+func TestCoerceSchemaTestWithStringToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse("Luna")
 
@@ -39,7 +39,7 @@ func TestCoerceSchema_TestWithStringToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithStringToBool_1(t *testing.T) {
+func TestCoerceSchemaTestWithStringToBool1(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse("true")
 
@@ -47,7 +47,7 @@ func TestCoerceSchema_TestWithStringToBool_1(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithStringToBool_2(t *testing.T) {
+func TestCoerceSchemaTestWithStringToBool2(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse("FalSe")
 
@@ -55,7 +55,7 @@ func TestCoerceSchema_TestWithStringToBool_2(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithEmptyStringToBool(t *testing.T) {
+func TestCoerceSchemaTestWithEmptyStringToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse("")
 
@@ -63,7 +63,7 @@ func TestCoerceSchema_TestWithEmptyStringToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestWithNilToBool(t *testing.T) {
+func TestCoerceSchemaTestWithNilToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse(nil)
 
@@ -71,7 +71,7 @@ func TestCoerceSchema_TestWithNilToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_Test1ToBool(t *testing.T) {
+func TestCoerceSchemaTest1ToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse(1)
 
@@ -79,7 +79,7 @@ func TestCoerceSchema_Test1ToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_Test0ToBool(t *testing.T) {
+func TestCoerceSchemaTest0ToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse(0)
 
@@ -87,7 +87,7 @@ func TestCoerceSchema_Test0ToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestFalseToBool(t *testing.T) {
+func TestCoerceSchemaTestFalseToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse(false)
 
@@ -95,7 +95,7 @@ func TestCoerceSchema_TestFalseToBool(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestCoerceSchema_TestTrueToBool(t *testing.T) {
+func TestCoerceSchemaTestTrueToBool(t *testing.T) {
 	schema := z.NewCoerceSchema()
 	result, err := schema.Bool().Parse(true)
 

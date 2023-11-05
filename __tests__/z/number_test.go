@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestNumberSchema_TestValidNumber(t *testing.T) {
+func TestNumberSchemaTestValidNumber(t *testing.T) {
 	schema := z.NewNumberSchema()
 	result, err := schema.Parse(42.5)
 
@@ -15,7 +15,7 @@ func TestNumberSchema_TestValidNumber(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestNumberSchema_TestParseWithDefaultErrorMessage(t *testing.T) {
+func TestNumberSchemaTestParseWithDefaultErrorMessage(t *testing.T) {
 	schema := z.NewNumberSchema()
 	result, err := schema.Parse("Hi")
 
@@ -24,7 +24,7 @@ func TestNumberSchema_TestParseWithDefaultErrorMessage(t *testing.T) {
 	assert.Equal(t, err.Error(), "value must be a number")
 }
 
-func TestNumberSchema_TestParseWithCustomErrorMessage(t *testing.T) {
+func TestNumberSchemaTestParseWithCustomErrorMessage(t *testing.T) {
 	schema := z.NewNumberSchema()
 	result, err := schema.Parse("Hi", "Custom error message")
 
@@ -32,7 +32,7 @@ func TestNumberSchema_TestParseWithCustomErrorMessage(t *testing.T) {
 	assert.EqualError(t, err, "Custom error message")
 }
 
-func TestNumberSchema_TestParseWithManyCustomErrorMessages(t *testing.T) {
+func TestNumberSchemaTestParseWithManyCustomErrorMessages(t *testing.T) {
 	schema := z.NewNumberSchema()
 	result, err := schema.Parse("Hi", "First custom error message", "Second custom error message")
 

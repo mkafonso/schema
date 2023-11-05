@@ -12,7 +12,7 @@ type Person struct {
 	Age  int    `json:"age"`
 }
 
-func TestParseStruct_ValidData(t *testing.T) {
+func TestParseStructValidData(t *testing.T) {
 	data := map[string]interface{}{
 		"name": "Alice",
 		"age":  30,
@@ -26,7 +26,7 @@ func TestParseStruct_ValidData(t *testing.T) {
 	assert.Equal(t, 30, person.Age)
 }
 
-func TestParseStruct_MissingFieldAge(t *testing.T) {
+func TestParseStructMissingFieldAge(t *testing.T) {
 	data := map[string]interface{}{
 		"name": "Bob",
 	}
@@ -38,7 +38,7 @@ func TestParseStruct_MissingFieldAge(t *testing.T) {
 	assert.Equal(t, err.Error(), "missing field: age")
 }
 
-func TestParseStruct_InvalidFieldTypeAge(t *testing.T) {
+func TestParseStructInvalidFieldTypeAge(t *testing.T) {
 	data := map[string]interface{}{
 		"name": "Charlie",
 		"age":  "invalid-type",
@@ -51,7 +51,7 @@ func TestParseStruct_InvalidFieldTypeAge(t *testing.T) {
 	assert.Equal(t, err.Error(), "field type mismatch: age")
 }
 
-func TestParseStruct_InvalidTarget(t *testing.T) {
+func TestParseStructInvalidTarget(t *testing.T) {
 	data := map[string]interface{}{
 		"name": "David",
 		"age":  25,

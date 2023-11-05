@@ -7,7 +7,7 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
-func TestStringSchema_TestValidString(t *testing.T) {
+func TestStringSchemaTestValidString(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Parse("Luna")
 
@@ -15,7 +15,7 @@ func TestStringSchema_TestValidString(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestStringSchema_TestParseWithDefaultErrorMessage(t *testing.T) {
+func TestStringSchemaTestParseWithDefaultErrorMessage(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Parse(42)
 
@@ -24,7 +24,7 @@ func TestStringSchema_TestParseWithDefaultErrorMessage(t *testing.T) {
 	assert.Equal(t, err.Error(), "value must be a string")
 }
 
-func TestStringSchema_TestParseWithCustomErrorMessage(t *testing.T) {
+func TestStringSchemaTestParseWithCustomErrorMessage(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Parse(42, "Custom error message")
 
@@ -32,7 +32,7 @@ func TestStringSchema_TestParseWithCustomErrorMessage(t *testing.T) {
 	assert.Equal(t, err.Error(), "Custom error message")
 }
 
-func TestStringSchema_TestParseWithManyCustomErrorMessages(t *testing.T) {
+func TestStringSchemaTestParseWithManyCustomErrorMessages(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Parse(42, "First custom error message", "Second custom error message")
 
@@ -40,7 +40,7 @@ func TestStringSchema_TestParseWithManyCustomErrorMessages(t *testing.T) {
 	assert.Equal(t, err.Error(), "First custom error message")
 }
 
-func TestStringSchema_TestValidMinLengthConstraint(t *testing.T) {
+func TestStringSchemaTestValidMinLengthConstraint(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Min(2, "length must be at least 2 characters").Parse("Luna")
 
@@ -48,7 +48,7 @@ func TestStringSchema_TestValidMinLengthConstraint(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestStringSchema_TestInValidMinLengthConstraint(t *testing.T) {
+func TestStringSchemaTestInValidMinLengthConstraint(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Min(5, "length must be at least 5 characters").Parse("Hi")
 
@@ -57,7 +57,7 @@ func TestStringSchema_TestInValidMinLengthConstraint(t *testing.T) {
 	assert.Equal(t, err.Error(), "length must be at least 5 characters")
 }
 
-func TestStringSchema_TestValidMaxLengthConstraint(t *testing.T) {
+func TestStringSchemaTestValidMaxLengthConstraint(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Max(10, "length must not exceed 2 characters").Parse("Luna")
 
@@ -65,7 +65,7 @@ func TestStringSchema_TestValidMaxLengthConstraint(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestStringSchema_TestInValidMaxLengthConstraint(t *testing.T) {
+func TestStringSchemaTestInValidMaxLengthConstraint(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Max(2, "length must not exceed 2 characters").Parse("Luna")
 
@@ -74,7 +74,7 @@ func TestStringSchema_TestInValidMaxLengthConstraint(t *testing.T) {
 	assert.Equal(t, err.Error(), "length must not exceed 2 characters")
 }
 
-func TestStringSchema_TestValidEmail(t *testing.T) {
+func TestStringSchemaTestValidEmail(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Email("custom error message").Parse("email@email.com")
 
@@ -82,7 +82,7 @@ func TestStringSchema_TestValidEmail(t *testing.T) {
 	assert.NoError(t, err)
 }
 
-func TestStringSchema_TestInvalidEmail(t *testing.T) {
+func TestStringSchemaTestInvalidEmail(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Email("custom error message").Parse("invalid-email.com")
 
@@ -91,7 +91,7 @@ func TestStringSchema_TestInvalidEmail(t *testing.T) {
 	assert.Equal(t, err.Error(), "custom error message")
 }
 
-func TestStringSchema_TestValidEmailAndIncorrectLength(t *testing.T) {
+func TestStringSchemaTestValidEmailAndIncorrectLength(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Min(100, "length custom error").Email("email error message").Parse("me@there.com")
 
@@ -100,7 +100,7 @@ func TestStringSchema_TestValidEmailAndIncorrectLength(t *testing.T) {
 	assert.Equal(t, err.Error(), "length custom error")
 }
 
-func TestStringSchema_TestInValidEmailAndCorrectLength(t *testing.T) {
+func TestStringSchemaTestInValidEmailAndCorrectLength(t *testing.T) {
 	schema := z.NewStringSchema()
 	result, err := schema.Min(1, "length custom error").Email("email error message").Parse("invalid-email.com")
 
