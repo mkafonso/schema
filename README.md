@@ -12,6 +12,7 @@ This open-source project is a schema validation toolkit inspired by [zod.dev](ht
 - Basic Usage
   - [String Validation](#string-validation)
   - [Number Validation](#number-validation)
+  - [Struct Validation](#struct-validation)
  
 
 ## <div id="how-to-use" />How to use
@@ -103,4 +104,62 @@ In this example, we once again create a number schema, but this time, we attempt
 // Expect an error when the number is invalid and return a custom error message
 schema := z.NewNumberSchema()
 result, err := schema.Parse("Hi", "Custom error message")
+```
+
+## <div id="struct-validation" />Struct Validation
+
+In this section, we'll explore how to perform validation on Go structs using the go-schema package. This allows you to validate and parse data into structured Go types, such as the Person struct defined in the example.
+
+
+In the first example, we define a Person struct with Name and Age fields. We then create a map containing valid data for a person. We use z.ParseStruct to parse the data into a Person struct. Since the data is valid and matches the struct's structure, no error is expected.
+```go
+// Define a Person struct
+type Person struct {
+  Name string `json:"name"`
+  Age  int    `json:"age"`
+}
+
+// Valid Data Example
+data := map[string]interface{}{
+  "name": "Alice",
+  "age":  30,
+}
+
+person := Person{}
+err := z.ParseStruct(data, &person)
+```
+
+In the second example, we provide data with a missing age field. We attempt to parse this data into a Person struct. Because the data is missing a required field, we expect an error.
+```go
+// Missing Field Example
+data := map[string]interface{}{
+  "name": "Bob",
+}
+
+person := Person{}
+err := z.ParseStruct(data, &person)
+```
+
+The third example demonstrates an attempt to assign an invalid data type to the age field. We provide a string as the age value when it should be an integer. An error is expected in this case.
+```go
+// Invalid Field Type (age)
+data := map[string]interface{}{
+  "name": "Charlie",
+  "age":  "invalid-type",
+}
+
+person := Person{}
+err := z.ParseStruct(data, &person)
+```
+
+In the final example, we intentionally use the wrong reference for z.ParseStruct. Instead of passing &person to capture the result in the person variable, we mistakenly use person without the reference. This is an incorrect usage of the function and will result in an error.
+```go
+// Example of an Invalid Target (Wrong Reference)
+data := map[string]interface{}{
+  "name": "David",
+  "age":  25,
+}
+
+person := Person{}
+err := z.ParseStruct(data, person)
 ```
