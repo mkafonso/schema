@@ -4,28 +4,33 @@ import (
 	"testing"
 
 	"github.com/mkafonso/go-schema/z"
-	"github.com/stretchr/testify/assert"
 )
 
 func TestEnumSchemaTestValidValue(t *testing.T) {
 	schema := z.NewEnumSchema("apple", "banana")
 	result := schema.Parse("apple")
 
-	assert.True(t, result)
+	if result != true {
+		t.Error("Expected true, got false")
+	}
 }
 
 func TestEnumSchemaTestIncensitiveCase(t *testing.T) {
 	schema := z.NewEnumSchema("apple", "banana")
 	result := schema.Parse("BANANA")
 
-	assert.True(t, result)
+	if result != true {
+		t.Error("Expected true, got false")
+	}
 }
 
 func TestEnumSchemaTestInvalidValue(t *testing.T) {
 	schema := z.NewEnumSchema("apple", "banana")
 	result := schema.Parse("yellow")
 
-	assert.False(t, result)
+	if result != false {
+		t.Error("Expected false, got true")
+	}
 }
 
 func TestEnumSchemaTestGetEnumList(t *testing.T) {
@@ -34,5 +39,13 @@ func TestEnumSchemaTestGetEnumList(t *testing.T) {
 
 	expectedList := []string{"apple", "banana"}
 
-	assert.ElementsMatch(t, result, expectedList)
+	if len(result) != len(expectedList) {
+		t.Errorf("Expected result length of %d, got %d", len(expectedList), len(result))
+	} else {
+		for i, val := range result {
+			if val != expectedList[i] {
+				t.Errorf("Expected '%s', got '%s'", expectedList[i], val)
+			}
+		}
+	}
 }
