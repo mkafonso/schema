@@ -11,6 +11,7 @@ This open-source project is a schema validation toolkit inspired by [zod.dev](ht
 - [Getting started](#how-to-use)
 - Basic Usage
   - [String Validation](#string-validation)
+  - [Number Validation](#number-validation)
  
 
 ## <div id="how-to-use" />How to use
@@ -83,4 +84,23 @@ Finally, you can combine multiple validation methods to perform various checks o
 // Combine methods
 schema := z.NewStringSchema()
 result, err := schema.Min(100, "length custom error").Email("email error message").Parse("me@there.com")
+```
+
+
+## <div id="number" />Number Validation
+
+In this section, we'll explore how to create a schema for numbers using the go-schema package and perform various numeric validations.
+
+To start, we create a numeric schema using z.NewNumberSchema() and attempt to parse the number 42.5. Since 42.5 is a valid number, no error is expected.
+```go
+// Create a schema for numbers
+schema := z.NewNumberSchema()
+result, err := schema.Parse(42.5)
+```
+
+In this example, we once again create a number schema, but this time, we attempt to parse the value "Hi" as a number. Since "Hi" is not a valid number, we expect an error with the custom error message provided.
+```go
+// Expect an error when the number is invalid and return a custom error message
+schema := z.NewNumberSchema()
+result, err := schema.Parse("Hi", "Custom error message")
 ```
