@@ -1,17 +1,27 @@
-## go-schema
+  <h2 align="center">
+   ##  GO SCHEMA ## 
+  </h2>
 
-- Zod-inspired project: https://github.com/colinhacks/zod
-- Star the repository
 
----
+This open-source project is a schema validation toolkit inspired by [zod.dev](https://zod.dev/). Feel free to use and modify it for any purpose. If you have any suggestions for improvement, please don't hesitate to reach out. Thank you!
 
-### How to use
 
-add the package
+## Contents
 
-> go get github.com/mkafonso/go-schema
+- [Getting started](#how-to-use)
+- Basic Usage
+  - [String Validation](#string-validation)
+ 
 
-import in your project
+## <div id="how-to-use" />How to use
+
+Add the package to your project using the following command:
+
+```go
+go get github.com/mkafonso/go-schema
+```
+
+Import the package in your project:
 
 ```go
 import (
@@ -19,151 +29,58 @@ import (
 )
 ```
 
---- 
+Once you've added the package and imported it into your project, you can start using the schema validation toolkit for your specific needs.
 
-### Basic Usage
 
-`Create a schema for string`
+## <div id="string-validation" />String Validation
 
+In this section, we'll explore the fundamental usage of the schema validation toolkit for strings using the go-schema package. You'll learn how to create a schema and perform various string validations.
+
+In the first example, we create a string schema using z.NewStringSchema() and attempt to parse the string "Luna." Since "Luna" is a valid string, no error is expected.
 ```go
-  // don't expect error when string is valid
-  schema := z.NewStringSchema()
-  result, err := schema.Parse("Luna")
-  
-  // expect an error when string is invalid and return custom error message
-  schema := z.NewStringSchema()
-  result, err := schema.Parse(42, "Custom error message")
-  
-  // expect an error when string is invalid and return the first custom error message
-  schema := z.NewStringSchema()
-  result, err := schema.Parse(42, "First custom error message", "Second custom error message")
-  
-  // check the string length with Min Method
-  schema := z.NewStringSchema()
-  result, err := schema.Min(2, "length must be at least 2 characters").Parse("Luna")
-  
-  // check the string length with Max Method
-  schema := z.NewStringSchema()
-  result, err := schema.Max(10, "length must not exceed 2 characters").Parse("Luna")
-  
-  // check if the string is a valid email address
-  schema := z.NewStringSchema()
-  result, err := schema.Email("custom error message").Parse("email@email.com")
-  
-  // can combine methods
-  schema := z.NewStringSchema()
-  result, err := schema.Min(100, "length custom error").Email("email error message").Parse("me@there.com")
-
+// Create a schema for string
+schema := z.NewStringSchema()
+result, err := schema.Parse("Luna")
 ```
 
-`Create a schema for number`
-
+In the second example, we again create a string schema. This time, we attempt to parse the value 42 as a string. Since 42 is not a valid string, we expect an error with the custom error message provided.
 ```go
-    // don't expect error when number is valid
-    schema := z.NewNumberSchema()
-    result, err := schema.Parse(42.5)
-    
-    // expect an error when number is invalid and return custom error message
-    schema := z.NewNumberSchema()
-    result, err := schema.Parse("Hi", "Custom error message")
+// Expect an error when the string is invalid and return a custom error message
+schema := z.NewStringSchema()
+result, err := schema.Parse(42, "Custom error message")
 ```
 
----
-
-### Struct validation
-
+In the third example, we use the same schema to parse a non-string value (42) and expect an error. The provided custom error messages are checked in order, and the first one is returned in the error message.
 ```go
-
-    type Person struct {
-      Name string `json:"name"`
-      Age  int    `json:"age"`
-    }
-    
-    // Valid Data example
-    data := map[string]interface{}{
-      "name": "Alice",
-      "age":  30,
-    }
-    
-    person := Person{}
-    err := z.ParseStruct(data, &person)
-    
-    // Missing field example
-    data := map[string]interface{}{
-      "name": "Bob",
-    }
-    
-    person := Person{}
-    err := z.ParseStruct(data, &person)
-    
-    // Invalid Field Type (age)
-    data := map[string]interface{}{
-      "name": "Charlie",
-      "age":  "invalid-type",
-    }
-    
-    person := Person{}
-    err := z.ParseStruct(data, &person)
-    
-    // example invalid target (wrong reference)
-    data := map[string]interface{}{
-      "name": "David",
-      "age":  25,
-    }
-    
-    person := Person{}
-    err := z.ParseStruct(data, person)
+// Expect an error when the string is invalid and return the first custom error message
+schema := z.NewStringSchema()
+result, err := schema.Parse(42, "First custom error message", "Second custom error message")
 ```
 
----
-
-### Coercion
-
+In the next example, we create a string schema and use the Min method to check the length of the string. We expect the string to be at least 2 characters long, and if it's not, a custom error message will be returned.
 ```go
-    // coercing data into strings
-    schema := z.NewCoerceSchema()
-    result, err := schema.String().Parse("Luna") // "Luna"
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.String().Parse(12) // "12"
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.String().Parse(true) // "true"
-
-
-    // coercing data into strings
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse("Luna") // true
-    
-    schema := z.NewCoerceSchema() 
-    result, err := schema.Bool().Parse("true") // true
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse("FalSe") // true
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse("") // false
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse(nil) // false
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse(1) // true
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse(0) // false
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse(false) // false
-    
-    schema := z.NewCoerceSchema()
-    result, err := schema.Bool().Parse(true) // true
+// Check the string length with the Min Method
+schema := z.NewStringSchema()
+result, err := schema.Min(2, "length must be at least 2 characters").Parse("Luna")
 ```
 
----
+Similarly, in the following example, we use the Max method to ensure that the string does not exceed a length of 10 characters. If it does, a custom error message is returned.
+```go
+// Check the string length with the Max Method
+schema := z.NewStringSchema()
+result, err := schema.Max(10, "length must not exceed 10 characters").Parse("Luna")
+```
 
-### Comprehensive description for each method
+In the penultimate example, we check whether the string is a valid email address using the Email method. If the string is not a valid email, a custom error message is provided.
+```go
+// Check if the string is a valid email address
+schema := z.NewStringSchema()
+result, err := schema.Email("custom error message").Parse("email@email.com")
+```
 
-![Screen Shot 2023-09-27 at 01 55 14](https://github.com/mkafonso/go-schema/assets/73212666/17e90457-3585-4dfd-8a43-37aec816ce60)
-
-
+Finally, you can combine multiple validation methods to perform various checks on the string. In this example, we first check the string's length and then verify if it's a valid email address. If any validation fails, the respective custom error message is returned.
+```go
+// Combine methods
+schema := z.NewStringSchema()
+result, err := schema.Min(100, "length custom error").Email("email error message").Parse("me@there.com")
+```
