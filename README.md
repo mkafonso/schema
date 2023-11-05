@@ -14,7 +14,7 @@ This open-source project is a schema validation toolkit inspired by [zod.dev](ht
   - [Enum Validation](#enum-validation)
   - [Coercion](#coercion)
 
-## <div id="how-to-use" />How to use
+## <div id="how-to-use" />Getting started
 
 Add the package to your project using the following command:
 
