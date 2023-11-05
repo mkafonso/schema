@@ -11,6 +11,7 @@ This open-source project is a schema validation toolkit inspired by [zod.dev](ht
   - [String Validation](#string-validation)
   - [Number Validation](#number-validation)
   - [Struct Validation](#struct-validation)
+  - [Enum Validation](#enum-validation)
   - [Coercion](#coercion)
 
 ## <div id="how-to-use" />How to use
@@ -170,6 +171,44 @@ data := map[string]interface{}{
 
 person := Person{}
 err := z.ParseStruct(data, person)
+```
+
+## <div id="enum-validation" />Enum Validation
+
+In this section, we'll explore how to use the schema validation toolkit for validating values against a set of allowed enum options. We will create an enum schema and validate values for case-insensitive enum options.
+
+In the first test, we create an enum schema using z.NewEnumSchema("apple", "banana") and attempt to parse the value "apple." Since "apple" is one of the valid enum options, the result is expected to be true.
+
+```go
+// Create an enum schema with enum options "apple" and "banana"
+schema := z.NewEnumSchema("apple", "banana")
+result := schema.Parse("apple")
+```
+
+In the second test, we again use the same schema to parse the value "BANANA," this time in uppercase. The enum options are case-insensitive, so the result is still expected to be true.
+
+```go
+// Check if enum options are case-insensitive
+schema := z.NewEnumSchema("apple", "banana")
+result := schema.Parse("BANANA")
+```
+
+In the third test, we attempt to parse the value "yellow," which is not one of the valid enum options. We expect the result to be false.
+
+```go
+// Expect an error when the value is not a valid enum option
+schema := z.NewEnumSchema("apple", "banana")
+result := schema.Parse("yellow")
+```
+
+In the fourth test, we retrieve the list of valid enum options using the schema.EnumList() function and compare it with the expected list.
+
+```go
+// Get the list of valid enum options
+schema := z.NewEnumSchema("apple", "banana")
+result := schema.EnumList()
+
+expectedList := []string{"apple", "banana"}
 ```
 
 ## <div id="coercion" />Coercion
