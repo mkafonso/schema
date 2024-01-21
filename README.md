@@ -1,5 +1,5 @@
   <h2 align="center">
-   ##  GO SCHEMA ##
+   ##  GO VERIFY ##
   </h2>
 
 This open-source project is a schema validation toolkit inspired by [zod.dev](https://zod.dev/). Feel free to use and modify it for any purpose. If you have any suggestions for improvement, please don't hesitate to reach out. Thank you!
@@ -19,14 +19,14 @@ This open-source project is a schema validation toolkit inspired by [zod.dev](ht
 Add the package to your project using the following command:
 
 ```go
-go get github.com/mkafonso/go-schema
+go get github.com/mkafonso/go-verify
 ```
 
 Import the package in your project:
 
 ```go
 import (
-  "github.com/mkafonso/go-schema/z"
+  "github.com/mkafonso/go-verify/z"
 )
 ```
 
