@@ -3,7 +3,7 @@ package z_test
 import (
 	"testing"
 
-	"github.com/mkafonso/go-schema/z"
+	"github.com/mkafonso/go-verify/z"
 )
 
 func TestCoerceSchemaTestWithStringToString(t *testing.T) {

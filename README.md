@@ -34,7 +34,7 @@ Once you've added the package and imported it into your project, you can start u
 
 ## <div id="string-validation" />String Validation
 
-In this section, we'll explore the fundamental usage of the schema validation toolkit for strings using the go-schema package. You'll learn how to create a schema and perform various string validations.
+In this section, we'll explore the fundamental usage of the schema validation toolkit for strings using the go-verify package. You'll learn how to create a schema and perform various string validations.
 
 In the first example, we create a string schema using z.NewStringSchema() and attempt to parse the string "Luna." Since "Luna" is a valid string, no error is expected.
 
@@ -94,7 +94,7 @@ result, err := schema.Min(100, "length custom error").Email("email error message
 
 ## <div id="number" />Number Validation
 
-In this section, we'll explore how to create a schema for numbers using the go-schema package and perform various numeric validations.
+In this section, we'll explore how to create a schema for numbers using the go-verify package and perform various numeric validations.
 
 To start, we create a numeric schema using z.NewNumberSchema() and attempt to parse the number 42.5. Since 42.5 is a valid number, no error is expected.
 
@@ -114,7 +114,7 @@ result, err := schema.Parse("Hi", "Custom error message")
 
 ## <div id="struct-validation" />Struct Validation
 
-In this section, we'll explore how to perform validation on Go structs using the go-schema package. This allows you to validate and parse data into structured Go types, such as the Person struct defined in the example.
+In this section, we'll explore how to perform validation on Go structs using the go-verify package. This allows you to validate and parse data into structured Go types, such as the Person struct defined in the example.
 
 In the first example, we define a Person struct with Name and Age fields. We then create a map containing valid data for a person. We use z.ParseStruct to parse the data into a Person struct. Since the data is valid and matches the struct's structure, no error is expected.
 
@@ -213,7 +213,7 @@ expectedList := []string{"apple", "banana"}
 
 ## <div id="coercion" />Coercion
 
-In this section, we'll explore how coercion works using the go-schema package. Coercion allows you to convert data of one type into another type as needed.
+In this section, we'll explore how coercion works using the go-verify package. Coercion allows you to convert data of one type into another type as needed.
 
 - In the first example, we coerce the data into a string, and it remains the same since it's already a string.
 - In the second example, we coerce the numeric value 12 into a string "12."
