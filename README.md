@@ -1,6 +1,4 @@
-  <h2 align="center">
-   ##  GO VERIFY ##
-  </h2>
+#  GO VERIFY
 
 This open-source project is a schema validation toolkit inspired by [zod.dev](https://zod.dev/). Feel free to use and modify it for any purpose. If you have any suggestions for improvement, please don't hesitate to reach out. Thank you!
 
