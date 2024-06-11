@@ -16,7 +16,7 @@ Features include:
 
 ---
 
-# Installation
+## Installation
 
 To install this package, use `go get`:
 
@@ -24,7 +24,7 @@ To install this package, use `go get`:
 
 ---
 
-Get started:
+## Get started:
 
 -   Install schema with [one line of code](#installation)
 -   Check out the API Documentation https://pkg.go.dev/github.com/mkafonso/schema
