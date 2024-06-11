@@ -16,6 +16,14 @@ Features include:
 
 ---
 
+# Installation
+
+To install this package, use `go get`:
+
+    go get github.com/mkafonso/schema
+
+---
+
 Get started:
 
 -   Install schema with [one line of code](#installation)
@@ -54,44 +62,6 @@ func ValidateStringExample() {
 		fmt.Println("String validation successful!") // Message for successful validation
 	} else {
 		fmt.Println("String validation error:", result.Errors) // Printing validation errors
-	}
-}
-```
-
----
-
-# Installation
-
-To install this package, use `go get`:
-
-    go get github.com/mkafonso/schema
-
-```go
-package yours
-
-import (
-	"fmt"
-
-	"github.com/mkafonso/schema/pkg/validator"
-)
-
-func ValidateEmailExample() {
-	input := "mkafonso.dev@gmail.com"
-
-	// Defining a validation schema
-	stringValidator := validator.NewStringValidator().
-		MinLength(5, "A string deve ter no mínimo 5 caracteres").   // Sets minimum length constraint
-		MaxLength(50, "A string deve ter no máximo 50 caracteres"). // Sets maximum length constraint
-		IsEmail("Formato de email inválido")                        // Validates as an email format
-
-	// Validating the input
-	result := stringValidator.Validate(input)
-
-	// Handling validation result
-	if result.IsValid {
-		fmt.Println("Validation successful!") // Message for successful validation
-	} else {
-		fmt.Println("Validation error:", result.Errors) // Printing validation errors
 	}
 }
 ```
