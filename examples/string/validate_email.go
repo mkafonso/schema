@@ -13,7 +13,7 @@ func ValidateEmailExample() {
 	stringValidator := validator.NewStringValidator().
 		MinLength(5, "A string deve ter no mínimo 5 caracteres").   // Sets minimum length constraint
 		MaxLength(50, "A string deve ter no máximo 50 caracteres"). // Sets maximum length constraint
-		Email("Formato de email inválido")                          // Validates as an email format
+		IsEmail("Formato de email inválido")                        // Validates as an email format
 
 	// Validating the input
 	result := stringValidator.Validate(input)

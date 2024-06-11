@@ -1,8 +1,9 @@
 package validator
 
-// Validator defines the base structure of the validator.
+// Validator is the base struct for all validators.
 type Validator struct {
-	validations []func(string) *ValidationResult // List of validation functions
+	stringValidations []func(string) *ValidationResult
+	numberValidations []func(float64) *ValidationResult
 }
 
 // NewValidator creates a new base validator.
@@ -10,32 +11,53 @@ type Validator struct {
 // Returns:
 //   - A pointer to the newly created Validator instance.
 func NewValidator() *Validator {
-	return &Validator{
-		validations: []func(string) *ValidationResult{},
-	}
+	return &Validator{}
 }
 
-// AddValidation adds a new validation to the validator.
-//
-// Parameters:
-//   - validation: The validation function to be added.
-func (v *Validator) AddValidation(validation func(string) *ValidationResult) {
-	v.validations = append(v.validations, validation)
+// AddStringValidation adds a string validation function.
+func (v *Validator) AddStringValidation(validation func(string) *ValidationResult) {
+	v.stringValidations = append(v.stringValidations, validation)
 }
 
-// Validate executes all validations.
+// AddNumberValidation adds a number validation function.
+func (v *Validator) AddNumberValidation(validation func(float64) *ValidationResult) {
+	v.numberValidations = append(v.numberValidations, validation)
+}
+
+// ValidateString executes all string validations.
 //
 // Parameters:
-//   - value: The value to be validated.
+//   - value: The string value to be validated.
 //
 // Returns:
 //   - The validation result.
-func (v *Validator) Validate(value string) *ValidationResult {
-	for _, validation := range v.validations {
-		result := validation(value)
-		if !result.IsValid {
-			return result
+func (v *Validator) ValidateString(value string) *ValidationResult {
+	result := &ValidationResult{IsValid: true}
+	for _, validation := range v.stringValidations {
+		validationResult := validation(value)
+		if !validationResult.IsValid {
+			result.IsValid = false
+			result.Errors = append(result.Errors, validationResult.Errors...)
 		}
 	}
-	return &ValidationResult{IsValid: true}
+	return result
+}
+
+// ValidateNumber executes all number validations.
+//
+// Parameters:
+//   - value: The number value to be validated.
+//
+// Returns:
+//   - The validation result.
+func (v *Validator) ValidateNumber(value float64) *ValidationResult {
+	result := &ValidationResult{IsValid: true}
+	for _, validation := range v.numberValidations {
+		validationResult := validation(value)
+		if !validationResult.IsValid {
+			result.IsValid = false
+			result.Errors = append(result.Errors, validationResult.Errors...)
+		}
+	}
+	return result
 }

@@ -27,7 +27,7 @@ func NewStringValidator() *StringValidator {
 // Returns:
 //   - A pointer to the StringValidator instance.
 func (v *StringValidator) MinLength(length int, errorMessage string) *StringValidator {
-	v.validator.AddValidation(func(value string) *ValidationResult {
+	v.validator.AddStringValidation(func(value string) *ValidationResult {
 		if len(value) < length {
 			return &ValidationResult{IsValid: false, Errors: []string{errorMessage}}
 		}
@@ -45,7 +45,7 @@ func (v *StringValidator) MinLength(length int, errorMessage string) *StringVali
 // Returns:
 //   - A pointer to the StringValidator instance.
 func (v *StringValidator) MaxLength(length int, errorMessage string) *StringValidator {
-	v.validator.AddValidation(func(value string) *ValidationResult {
+	v.validator.AddStringValidation(func(value string) *ValidationResult {
 		if len(value) > length {
 			return &ValidationResult{IsValid: false, Errors: []string{errorMessage}}
 		}
@@ -54,15 +54,15 @@ func (v *StringValidator) MaxLength(length int, errorMessage string) *StringVali
 	return v
 }
 
-// Email adds a validation for email format.
+// IsEmail adds a validation for email format.
 //
 // Parameters:
 //   - errorMessage: The error message to be returned if validation fails.
 //
 // Returns:
 //   - A pointer to the StringValidator instance.
-func (v *StringValidator) Email(errorMessage string) *StringValidator {
-	v.validator.AddValidation(func(value string) *ValidationResult {
+func (v *StringValidator) IsEmail(errorMessage string) *StringValidator {
+	v.validator.AddStringValidation(func(value string) *ValidationResult {
 		if !utils.IsValidEmail(value) {
 			return &ValidationResult{IsValid: false, Errors: []string{errorMessage}}
 		}
@@ -79,5 +79,5 @@ func (v *StringValidator) Email(errorMessage string) *StringValidator {
 // Returns:
 //   - The validation result.
 func (v *StringValidator) Validate(value string) *ValidationResult {
-	return v.validator.Validate(value)
+	return v.validator.ValidateString(value)
 }
