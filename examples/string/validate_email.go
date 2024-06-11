@@ -1,4 +1,4 @@
-package main
+package string
 
 import (
 	"fmt"
@@ -6,7 +6,7 @@ import (
 	"github.com/mkafonso/schema/pkg/validator"
 )
 
-func main() {
+func ValidateEmailExample() {
 	input := "mkafonso.dev@gmail.com"
 
 	// Defining a validation schema
