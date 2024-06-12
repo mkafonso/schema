@@ -1,4 +1,4 @@
-package number
+package validate_number
 
 import (
 	"fmt"

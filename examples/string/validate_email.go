@@ -1,4 +1,4 @@
-package string
+package validate_string
 
 import (
 	"fmt"

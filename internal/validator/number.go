@@ -21,7 +21,7 @@ func (v *NumberValidator) addValidation(validation func(float64) *ValidationResu
 // MinValue adds a validation for minimum value.
 //
 // Parameters:
-//   - value: The minimum value allowed.
+//   - min: The minimum value allowed.
 //   - errorMessage: The error message to be returned if validation fails.
 //
 // Returns:
@@ -39,7 +39,7 @@ func (v *NumberValidator) MinValue(min float64, errorMessage string) *NumberVali
 // MaxValue adds a validation for maximum value.
 //
 // Parameters:
-//   - value: The maximum value allowed.
+//   - max: The maximum value allowed.
 //   - errorMessage: The error message to be returned if validation fails.
 //
 // Returns:
@@ -156,4 +156,22 @@ func (v *NumberValidator) Validate(value float64) *ValidationResult {
 		}
 	}
 	return result
+}
+
+// ValidateInterface validates the input value, implementing ValidatorInterface.
+//
+// Parameters:
+//   - value: The value to be validated.
+//
+// Returns:
+//   - The validation result.
+func (v *NumberValidator) ValidateInterface(value interface{}) *ValidationResult {
+	switch val := value.(type) {
+	case float64:
+		return v.Validate(val)
+	case int:
+		return v.Validate(float64(val))
+	default:
+		return &ValidationResult{IsValid: false, Errors: []string{"Invalid type, expected number"}}
+	}
 }

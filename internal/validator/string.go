@@ -81,3 +81,17 @@ func (v *StringValidator) IsEmail(errorMessage string) *StringValidator {
 func (v *StringValidator) Validate(value string) *ValidationResult {
 	return v.validator.ValidateString(value)
 }
+
+// ValidateInterface validates the input value, implementing ValidatorInterface.
+//
+// Parameters:
+//   - value: The value to be validated.
+//
+// Returns:
+//   - The validation result.
+func (v *StringValidator) ValidateInterface(value interface{}) *ValidationResult {
+	if str, ok := value.(string); ok {
+		return v.Validate(str)
+	}
+	return &ValidationResult{IsValid: false, Errors: []string{"Invalid type, expected string"}}
+}

@@ -5,6 +5,7 @@ import (
 
 	validate_number "github.com/mkafonso/examples/number"
 	validate_string "github.com/mkafonso/examples/string"
+	validate_struct "github.com/mkafonso/examples/struct"
 )
 
 func main() {
@@ -55,4 +56,11 @@ func main() {
 	validate_number.ValidateNegativeExample()
 
 	fmt.Println("\n---------------------------------------")
+	fmt.Println("\n---------------------------------------")
+	fmt.Println("\n---------------------------------------")
+	fmt.Print("\nStruct validation\n\n")
+
+	// Example of number validation
+	fmt.Println("\nExample of struct validation:")
+	validate_struct.ValidateStructExample()
 }
