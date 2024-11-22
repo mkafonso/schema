@@ -1,4 +1,10 @@
+## Example
+
+![Untitled](https://github.com/user-attachments/assets/ae518aa4-c4ba-420c-af1c-236271114b33)
+
+
 # Schema - A Go Validation Library
+
 
 This is an open-source schema validation toolkit inspired by zod.dev. It provides a simple and expressive API for validating strings, numbers, struct, ... with various constraints. Schema is designed to be easy to use, extensible, and suitable for a wide range of applications.
 
