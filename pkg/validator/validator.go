@@ -28,5 +28,13 @@ func NewStructValidator() *validator.StructValidator {
 	return validator.NewStructValidator()
 }
 
+// NewBooleanValidator creates a new instance of the BooleanValidator.
+//
+// Returns:
+//   - A pointer to the newly created BooleanValidator instance.
+func NewBooleanValidator() *validator.BooleanValidator {
+	return validator.NewBooleanValidator()
+}
+
 // ValidationResult represents the result of a validation.
 type ValidationResult = validator.ValidationResult
